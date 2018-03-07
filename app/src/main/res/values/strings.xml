@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">By</string>
+    <string name="bottom_menu_near">附近</string>
+    <string name="bottom_menu_life">生活</string>
+    <string name="bottom_menu_home">首页</string>
+    <string name="bottom_menu_funny">娱乐</string>
+    <string name="bottom_menu_mine">我的</string>
+</resources>
