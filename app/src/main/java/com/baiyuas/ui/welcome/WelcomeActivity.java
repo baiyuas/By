@@ -1,11 +1,10 @@
 package com.baiyuas.ui.welcome;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.baiyuas.R;
-import com.baiyuas.model.bean.local.FloorBean;
 
 import java.util.List;
 
@@ -13,6 +12,11 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
+/**
+ * @作者: Leo
+ * @时间:2018/3/9
+ * @描述:https://baiyuas.github.io/
+ */
 public class WelcomeActivity extends AppCompatActivity implements WelcomeContact.View{
 
     @Inject
@@ -33,7 +37,7 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeContact
     }
 
     @Override
-    public void showFloorList(List<FloorBean> list) {
+    public void showFloorList(List list) {
         text.setText(list.toString());
     }
 

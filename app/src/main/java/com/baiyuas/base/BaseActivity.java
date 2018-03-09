@@ -1,11 +1,25 @@
 package com.baiyuas.base;
 
+import android.support.v7.app.AppCompatActivity;
+
+import com.baiyuas.base.inter.ISupport;
+import com.baiyuas.utils.log.ByLogger;
+import com.baiyuas.utils.toast.Toasty;
+
 /**
- * Copyright (c)2017
- * 欣网互联网络科技有限公司
- * author: lpc
- * created on: 2018/2/27 0027
- * description:
+ * @作者: Leo
+ * @时间:2018/3/9
+ * @描述:https://baiyuas.github.io/
  */
-public class BaseActivity {
+public abstract class BaseActivity extends AppCompatActivity implements ISupport {
+
+    @Override
+    public void toast(String msg) {
+        Toasty.show(getApplication(), msg);
+    }
+
+    @Override
+    public void log(String log) {
+        ByLogger.log(log);
+    }
 }
