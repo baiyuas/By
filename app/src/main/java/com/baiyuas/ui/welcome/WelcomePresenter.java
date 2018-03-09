@@ -5,11 +5,9 @@ import com.baiyuas.model.http.NetRepo;
 import javax.inject.Inject;
 
 /**
- * Copyright (c)2017
- * 欣网互联网络科技有限公司
- * author: lpc
- * created on: 2018/3/7 0007
- * description:
+ * @作者: Leo
+ * @时间:2018/3/9
+ * @描述:https://baiyuas.github.io/
  */
 public class WelcomePresenter implements WelcomeContact.Presenter{
 
@@ -35,7 +33,7 @@ public class WelcomePresenter implements WelcomeContact.Presenter{
     @Override
     public void reqFloorInfo() {
         if (mView != null) {
-            mView.showFloorList(mNetRepo.fetchFloorInfo());
+           // mView.showFloorList(mNetRepo.fetchFloorInfo());
         }
     }
 }

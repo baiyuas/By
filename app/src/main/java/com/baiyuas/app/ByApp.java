@@ -14,12 +14,11 @@ import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
+
 /**
- * Copyright (c)2017
- * 欣网互联网络科技有限公司
- * author: lpc
- * created on: 2018/2/27 0027
- * description:
+ * @作者: Leo
+ * @时间:2018/3/9
+ * @描述:https://baiyuas.github.io/
  */
 public class ByApp extends Application {
 

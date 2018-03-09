@@ -2,24 +2,21 @@ package com.baiyuas.ui.welcome;
 
 import com.baiyuas.base.BasePresenter;
 import com.baiyuas.base.BaseView;
-import com.baiyuas.model.bean.local.FloorBean;
 
 import java.util.List;
 
 /**
- * Copyright (c)2017
- * 欣网互联网络科技有限公司
- * author: lpc
- * created on: 2018/3/7 0007
- * description:
+ * @作者: Leo
+ * @时间:2018/3/9
+ * @描述:https://baiyuas.github.io/
  */
 public interface WelcomeContact {
 
     interface View extends BaseView<Presenter> {
-        void showFloorList(List<FloorBean> list);
+        void showFloorList(List list);
     }
 
-    interface Presenter extends BasePresenter<View>{
+    interface Presenter extends BasePresenter<View> {
        void reqFloorInfo();
     }
 
