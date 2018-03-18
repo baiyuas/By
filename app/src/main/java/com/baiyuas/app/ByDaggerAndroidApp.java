@@ -3,6 +3,9 @@ package com.baiyuas.app;
 import android.app.Activity;
 import android.app.Application;
 
+import com.baiyuas.di.component.DaggerAndroidAppComponent;
+import com.baiyuas.utils.log.ByLogger;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -23,7 +26,8 @@ public class ByDaggerAndroidApp extends Application implements HasActivityInject
     @Override
     public void onCreate() {
         super.onCreate();
-
+        DaggerAndroidAppComponent.builder().plus(this).build().inject(this);
+        ByLogger.init();
     }
 
     @Override

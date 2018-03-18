@@ -7,6 +7,10 @@ package com.baiyuas.utils;
  */
 public class Utils {
 
+    public static boolean checkNull(Object obj) {
+        return obj == null;
+    }
+
     public static boolean isValidEmail(String email) {
         return email.contains("@");
     }
