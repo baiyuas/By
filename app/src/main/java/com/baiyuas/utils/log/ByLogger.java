@@ -2,6 +2,7 @@ package com.baiyuas.utils.log;
 
 import android.support.annotation.NonNull;
 
+import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -15,6 +16,10 @@ public class ByLogger {
      * 默认Tag
      */
     private final static String DEFAULT_TAG = "hbmcc log:";
+
+    public static void init() {
+        Logger.addLogAdapter(new AndroidLogAdapter());
+    }
 
     public static void log(@NonNull String msg) {
         log(msg, LogLevel.D);

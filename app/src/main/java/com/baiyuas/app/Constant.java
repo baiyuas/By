@@ -7,4 +7,5 @@ package com.baiyuas.app;
  */
 public interface Constant {
 
+    String BASE_URL = "http://www.wanandroid.com/";
 }

@@ -1,48 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-
-    <RelativeLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvShow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hello World!"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="addGongGe"
-                android:text="添加宫格数据" />
-
-        </LinearLayout>
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/v_bottom_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
-            app:itemBackground="@android:color/white"
-            app:menu="@menu/bottom_nav_menu"/>
-
-    </RelativeLayout>
-
-
-</layout>
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+</LinearLayout>

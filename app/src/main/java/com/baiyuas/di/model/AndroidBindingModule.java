@@ -1,8 +1,11 @@
 package com.baiyuas.di.model;
 
 import com.baiyuas.di.scope.ActivityScope;
+import com.baiyuas.ui.MainActivity;
+import com.baiyuas.ui.MainModule;
+import com.baiyuas.ui.login.LoginActivity;
+import com.baiyuas.ui.login.LoginModule;
 import com.baiyuas.ui.welcome.WelcomeActivity;
-import com.baiyuas.ui.welcome.WelcomeModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -16,7 +19,11 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class AndroidBindingModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = {WelcomeModule.class})
-    abstract WelcomeActivity welcomeActivity();
+    @ContributesAndroidInjector(modules = {LoginModule.class})
+    abstract LoginActivity loginActivity();
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = {MainModule.class})
+    abstract MainActivity mainActivity();
 
 }
