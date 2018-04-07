@@ -1,12 +1,18 @@
 package com.baiyuas.model.http;
 
+import com.baiyuas.model.bean.HomeArticleBean;
+import com.baiyuas.model.bean.HomeBannerBean;
 import com.baiyuas.model.bean.UserBean;
 import com.baiyuas.model.bean.WanResponse;
+
+import java.util.List;
 
 import io.reactivex.Flowable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -39,5 +45,20 @@ public interface NetRepo {
     @POST("user/login")
     Flowable<WanResponse<UserBean>> login(@Field("username") String username,
                                              @Field("password") String password);
+
+    /**
+     * 首页Banner列表
+     * @return
+     */
+    @GET("banner/json")
+    Flowable<WanResponse<List<HomeBannerBean>>> fetchHomeBannerList();
+
+    /**
+     * 获取文章列表
+     * @param page 页码
+     * @return
+     */
+    @GET("article/list/{page}/json")
+    Flowable<WanResponse<HomeArticleBean>> fetchHomeArticleList(@Path("page") int page);
 
 }

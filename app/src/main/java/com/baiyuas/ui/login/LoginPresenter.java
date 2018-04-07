@@ -13,6 +13,8 @@ import com.baiyuas.utils.log.ByLogger;
 
 import javax.inject.Inject;
 
+import static com.baiyuas.utils.Utils.checkNull;
+
 /**
  * @作者: Leo
  * @时间:2018/3/11
@@ -34,30 +36,30 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
     public void login(String username, String password) {
         ByLogger.log("username ->" + username + "; password-> " + password);
         if (TextUtils.isEmpty(password)
-                && !Utils.checkNull(mView.get())) {
+                && !checkNull(mView.get())) {
             mView.get().showPasswordCheck(context.getResources().getString(R.string.error_field_required));
             return;
         }
 
         if (!Utils.isValidPassword(password)
-                && !Utils.checkNull(mView.get())) {
+                && !checkNull(mView.get())) {
             mView.get().showPasswordCheck(context.getResources().getString(R.string.error_invalid_password));
             return;
         }
 
         if (TextUtils.isEmpty(username)
-                && !Utils.checkNull(mView.get())) {
+                && !checkNull(mView.get())) {
             mView.get().showUsernameCheck(context.getResources().getString(R.string.error_field_required));
             return;
         }
 
         if (!Utils.isValidEmail(username)
-                && !Utils.checkNull(mView.get())) {
+                && !checkNull(mView.get())) {
             mView.get().showUsernameCheck(context.getResources().getString(R.string.error_invalid_email));
             return;
         }
 
-        if (!Utils.checkNull(mView.get())) {
+        if (!checkNull(mView.get())) {
             mView.get().showLoading();
         }
 
@@ -66,7 +68,7 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
                 .flatMap(response -> createData(response))
                 .subscribe(userBean -> {
                             ByLogger.log(userBean.toString());
-                            if (!Utils.checkNull(mView.get())) {
+                            if (!checkNull(mView.get())) {
                                 mView.get().dismissLoading();
                                 mView.get().showLoginSuccess();
                             }
@@ -74,7 +76,7 @@ public class LoginPresenter extends RxPresenter<LoginContact.View> implements Lo
                             String errorMsg = throwable instanceof NetException
                                     ? throwable.getMessage()
                                     : context.getResources().getString(R.string.tip_req_fail);
-                            if (!Utils.checkNull(mView.get())) {
+                            if (!checkNull(mView.get())) {
                                 mView.get().dismissLoading();
                                 mView.get().showLoginFail(errorMsg);
                             }

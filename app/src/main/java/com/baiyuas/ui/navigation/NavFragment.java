@@ -18,7 +18,7 @@ public class NavFragment extends MvpFragment<NavPresenter> {
 
     @Override
     protected int bindLayout() {
-        return R.layout.nav_fragment;
+        return R.layout.fragment_navigation;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> {
 
     @Override
     protected int bindLayout() {
-        return R.layout.project_fragment;
+        return R.layout.fragment_project;
     }
 
     @Override

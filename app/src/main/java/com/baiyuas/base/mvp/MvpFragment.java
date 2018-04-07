@@ -1,6 +1,9 @@
 package com.baiyuas.base.mvp;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.baiyuas.base.BaseFragment;
 
@@ -22,6 +25,12 @@ public abstract class MvpFragment<T extends RxPresenter> extends BaseFragment im
     public void onAttach(Context context) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        mPresenter.takeView(this);
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

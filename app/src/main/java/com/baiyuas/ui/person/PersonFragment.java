@@ -18,7 +18,7 @@ public class PersonFragment extends MvpFragment<PersonPresenter> {
 
     @Override
     protected int bindLayout() {
-        return R.layout.person_fragment;
+        return R.layout.fragment_person;
     }
 
     @Override

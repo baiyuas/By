@@ -3,13 +3,17 @@ package com.baiyuas.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baiyuas.R;
 import com.baiyuas.base.inter.ISupport;
 import com.baiyuas.utils.log.ByLogger;
 import com.baiyuas.utils.toast.Toasty;
+import com.jaeger.library.StatusBarUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -33,14 +37,14 @@ public abstract class BaseFragment extends Fragment implements ISupport{
             throw new IllegalStateException(
                     "layout id need to set");
         }
-        parentView = inflater.inflate(layoutId, null);
+        parentView = inflater.inflate(layoutId, null, false);
         return parentView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        unbinder = ButterKnife.bind(view);
+        unbinder = ButterKnife.bind(this, view);
         initEvent();
     }
 
@@ -64,5 +68,19 @@ public abstract class BaseFragment extends Fragment implements ISupport{
         ByLogger.log(log);
     }
 
+    public void setToolbar(Toolbar toolbar) {
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+    }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && getActivity() != null) {
+            setStatusBar();
+        }
+    }
+
+    public void setStatusBar() {
+        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.colorPrimary), 100);
+    }
 }

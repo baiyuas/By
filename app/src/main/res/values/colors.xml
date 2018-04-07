@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="btn_default_color">#FEC02E</color>
     <color name="tab_active_color">#FEC02E</color>
+    <color name="transparent">#00000000</color>
 </resources>

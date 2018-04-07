@@ -18,7 +18,7 @@ public class SysFragment extends MvpFragment<SysPresenter> {
 
     @Override
     protected int bindLayout() {
-        return R.layout.sys_fragment;
+        return R.layout.fragment_sys;
     }
 
     @Override
