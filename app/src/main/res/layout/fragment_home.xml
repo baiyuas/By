@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:background="@color/colorAccent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/transparent"/>
 
     <android.support.v4.widget.NestedScrollView
-
+        android:id="@+id/nsv_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -24,15 +17,22 @@
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"/>
+                android:layout_height="200dp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_article_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"/>
 </FrameLayout>
 
 

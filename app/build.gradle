@@ -89,7 +89,6 @@ dependencies {
     implementation rootProject.ext.dependencies["logger"]
     implementation rootProject.ext.dependencies["fragmentation"]
     implementation rootProject.ext.dependencies["crashreport"]
-    implementation rootProject.ext.dependencies["statusbar"]
 
     //widget
     implementation rootProject.ext.dependencies["bottom-bar"]

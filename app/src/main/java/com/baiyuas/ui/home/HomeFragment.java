@@ -1,6 +1,8 @@
 package com.baiyuas.ui.home;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,7 +12,7 @@ import com.baiyuas.R;
 import com.baiyuas.base.mvp.MvpFragment;
 import com.baiyuas.model.bean.HomeArticleBean;
 import com.baiyuas.model.bean.HomeBannerBean;
-import com.jaeger.library.StatusBarUtil;
+import com.baiyuas.utils.StatusBarUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -42,6 +44,9 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
     @BindView(R.id.rv_article_list)
     RecyclerView mRecycleView;
 
+    @BindView(R.id.nsv_container)
+    NestedScrollView mNestedScrollView;
+    int mDistanceY = 0;
     private int currentPage = 0;
     private ArticleAdapter mArticleAdapter;
 
@@ -56,24 +61,33 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
 
     @Override
     protected void initEvent() {
-        setToolbar(mToolbar);
-        mToolbar.setAlpha(0.5f);
-        mToolbar.setTitle("");
         setStatusBar();
+
+        initToolbar();
+        initBanner();
+        initRecycleView();
 
         mPresenter.fetchHomeBannerList();
         mPresenter.fetchHomeArticleList(currentPage);
-
-        initBanner();
-        initRecycleView();
     }
 
-    private void initRecycleView() {
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecycleView.setLayoutManager(llm);
-        mArticleAdapter = new ArticleAdapter();
-        mRecycleView.setAdapter(mArticleAdapter);
+    private void initToolbar() {
+        setToolbar(mToolbar);
+        mToolbar.setTitle("");
+        mToolbar.getBackground().setAlpha(0);
+        mToolbar.setTitleTextColor(Color.WHITE);
+        mNestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            mDistanceY += (scrollY - oldScrollY);
+            int targetHeight = 90;
+            if (mDistanceY <= targetHeight) {
+                mToolbar.setTitle("");
+                int alpha = (int) (mDistanceY * 0.1f / targetHeight * 255);
+                mToolbar.getBackground().setAlpha(alpha);
+            } else {
+                mToolbar.setTitle(R.string.app_name);
+                mToolbar.getBackground().setAlpha(255);
+            }
+        });
     }
 
     private void initBanner() {
@@ -94,6 +108,19 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
         mBanner.setDelayTime(3000);
         //设置指示器位置（当banner模式中有指示器时）
         mBanner.setIndicatorGravity(BannerConfig.CENTER);
+    }
+
+    private void initRecycleView() {
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecycleView.setLayoutManager(llm);
+        mArticleAdapter = new ArticleAdapter();
+        mRecycleView.setAdapter(mArticleAdapter);
+    }
+
+    @Override
+    public void setStatusBar() {
+        StatusBarUtil.setTransparentForFragment(getActivity(), mToolbar);
     }
 
     @Override
@@ -122,19 +149,14 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mBanner.stopAutoPlay();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         mBanner.startAutoPlay();
     }
 
     @Override
-    public void setStatusBar() {
-        StatusBarUtil.setTransparent(getActivity());
+    public void onPause() {
+        super.onPause();
+        mBanner.stopAutoPlay();
     }
 }

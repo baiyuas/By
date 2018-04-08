@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 
 import com.baiyuas.R;
 import com.baiyuas.base.inter.ISupport;
+import com.baiyuas.utils.StatusBarUtil;
 import com.baiyuas.utils.log.ByLogger;
 import com.baiyuas.utils.toast.Toasty;
-import com.jaeger.library.StatusBarUtil;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
