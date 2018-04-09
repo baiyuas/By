@@ -1,36 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                tools:context=".ui.MainActivity">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="2dp"
+    card_view:cardUseCompatPadding="true"
+    tools:context=".ui.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_article_title"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:textSize="18sp"
-        tools:text="谈谈我理解的Android应用架构"/>
+        android:background="@drawable/item_selector"
+        android:clickable="true"
+        android:focusable="true">
 
-    <TextView
-        android:id="@+id/tv_article_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/tv_article_title"
-        android:layout_below="@id/tv_article_title"
-        android:layout_marginTop="4dp"
-        tools:text="作者：xxx"/>
+        <View
+            android:id="@+id/nav_line"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="#e23212" />
 
-    <TextView
-        android:id="@+id/tv_article_catalog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/tv_article_author"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/tv_article_author"
-        tools:text="分类：keji"/>
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_article_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:textSize="18sp"
+                tools:text="谈谈我理解的Android应用架构" />
+
+            <TextView
+                android:id="@+id/tv_article_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_article_title"
+                android:layout_below="@id/tv_article_title"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
+                tools:text="作者：xxx" />
+
+            <TextView
+                android:id="@+id/tv_article_catalog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/tv_article_author"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/tv_article_author"
+                tools:text="分类：keji" />
+
+            <TextView
+                android:id="@+id/tv_article_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/tv_article_author"
+                android:layout_marginRight="4dp"
+                tools:text="2015-03-02" />
+        </RelativeLayout>
+    </FrameLayout>
+</android.support.v7.widget.CardView>

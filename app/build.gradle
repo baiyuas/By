@@ -49,8 +49,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //base
     implementation rootProject.ext.dependencies["appcompat-v7"]
-    implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["recyclerview-v7"]
+    implementation rootProject.ext.dependencies["cardview-v7"]
+    implementation rootProject.ext.dependencies["design"]
     //rx
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxandroid"]
@@ -93,4 +94,5 @@ dependencies {
     //widget
     implementation rootProject.ext.dependencies["bottom-bar"]
     implementation rootProject.ext.dependencies["banner"]
+    implementation rootProject.ext.dependencies["smart-refresh-layout"]
 }

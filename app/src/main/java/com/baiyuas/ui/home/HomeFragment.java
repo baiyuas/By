@@ -13,6 +13,9 @@ import com.baiyuas.base.mvp.MvpFragment;
 import com.baiyuas.model.bean.HomeArticleBean;
 import com.baiyuas.model.bean.HomeBannerBean;
 import com.baiyuas.utils.StatusBarUtil;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -46,6 +49,11 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
 
     @BindView(R.id.nsv_container)
     NestedScrollView mNestedScrollView;
+
+    @BindView(R.id.srl_reload)
+    RefreshLayout mRefreshLayout;
+
+
     int mDistanceY = 0;
     private int currentPage = 0;
     private ArticleAdapter mArticleAdapter;
@@ -69,6 +77,11 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
 
         mPresenter.fetchHomeBannerList();
         mPresenter.fetchHomeArticleList(currentPage);
+        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
+            mPresenter.fetchHomeBannerList();
+            mPresenter.fetchHomeArticleList(currentPage = 0);
+        });
+        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> mPresenter.fetchHomeArticleList(++currentPage));
     }
 
     private void initToolbar() {
@@ -125,6 +138,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
 
     @Override
     public void showHomeBannerList(List<HomeBannerBean> list) {
+        mRefreshLayout.finishRefresh(true);
         List<String> images = new ArrayList<>();
         List<String> titles = new ArrayList<>();
         Observable.fromIterable(list)
@@ -142,7 +156,10 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
 
     @Override
     public void showHomeArticle(HomeArticleBean homeArticleBean) {
+        mRefreshLayout.finishRefresh(true);
+        mRefreshLayout.finishLoadMore(true);
         if (homeArticleBean.getPageCount() == currentPage + 1) {
+            mRefreshLayout.setNoMoreData(true);
             return;
         }
         mArticleAdapter.addData(homeArticleBean.getDatas());

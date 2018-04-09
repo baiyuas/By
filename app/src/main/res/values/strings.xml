@@ -18,4 +18,7 @@
     <string name="tab_system">体系</string>
     <string name="tab_navigation">导航</string>
     <string name="tab_person">我的</string>
+    <string name="item_article_author_str">作者: %s</string>
+    <string name="item_article_catalog_str">分类: %s</string>
+    <string name="item_article_date_str">时间: %s</string>
 </resources>
