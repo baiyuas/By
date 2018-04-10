@@ -29,6 +29,8 @@ import dagger.android.HasActivityInjector;
  */
 public class ByDaggerAndroidApp extends Application implements HasActivityInjector {
 
+    private static ByDaggerAndroidApp instance;
+
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
@@ -46,12 +48,17 @@ public class ByDaggerAndroidApp extends Application implements HasActivityInject
     @Inject
     DispatchingAndroidInjector<Activity> activityInjector;
 
+    public static ByDaggerAndroidApp get() {
+        return instance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         DaggerAndroidAppComponent.builder().plus(this).build().inject(this);
         ByLogger.init();
+
+        instance = this;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.baiyuas.model.http;
 
+import com.baiyuas.model.bean.HierarchyBean;
 import com.baiyuas.model.bean.HomeArticleBean;
 import com.baiyuas.model.bean.HomeBannerBean;
 import com.baiyuas.model.bean.UserBean;
@@ -24,6 +25,7 @@ public interface NetRepo {
 
     /**
      * 注册
+     *
      * @param username
      * @param password
      * @param repassword
@@ -37,6 +39,7 @@ public interface NetRepo {
 
     /**
      * 登录
+     *
      * @param username
      * @param password
      * @return
@@ -44,10 +47,11 @@ public interface NetRepo {
     @FormUrlEncoded
     @POST("user/login")
     Flowable<WanResponse<UserBean>> login(@Field("username") String username,
-                                             @Field("password") String password);
+                                          @Field("password") String password);
 
     /**
      * 首页Banner列表
+     *
      * @return
      */
     @GET("banner/json")
@@ -55,10 +59,28 @@ public interface NetRepo {
 
     /**
      * 获取文章列表
+     *
      * @param page 页码
      * @return
      */
     @GET("article/list/{page}/json")
     Flowable<WanResponse<HomeArticleBean>> fetchHomeArticleList(@Path("page") int page);
 
+    /**
+     * 获取体系列表
+     *
+     * @return
+     */
+    @GET("tree/json")
+    Flowable<WanResponse<List<HierarchyBean>>> fetchHierarchyList();
+
+    /**
+     * 获取体系下文章列表
+     *
+     * @param page 页码
+     * @param cid 体系id
+     * @return
+     */
+    @GET("article/list/{page}/json")
+    Flowable<WanResponse<HomeArticleBean>> fetchHierarchyArticleList(@Path("page") int page, @Query("cid") int cid);
 }

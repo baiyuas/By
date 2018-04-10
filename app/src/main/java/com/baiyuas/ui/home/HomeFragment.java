@@ -12,10 +12,9 @@ import com.baiyuas.R;
 import com.baiyuas.base.mvp.MvpFragment;
 import com.baiyuas.model.bean.HomeArticleBean;
 import com.baiyuas.model.bean.HomeBannerBean;
+import com.baiyuas.ui.adapter.ArticleAdapter;
 import com.baiyuas.utils.StatusBarUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -57,6 +56,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
     int mDistanceY = 0;
     private int currentPage = 0;
     private ArticleAdapter mArticleAdapter;
+    private boolean isRefresh = false;
 
     @Inject
     public HomeFragment() {
@@ -79,6 +79,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
         mPresenter.fetchHomeArticleList(currentPage);
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
             mPresenter.fetchHomeBannerList();
+            isRefresh = true;
             mPresenter.fetchHomeArticleList(currentPage = 0);
         });
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> mPresenter.fetchHomeArticleList(++currentPage));
@@ -158,11 +159,15 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
     public void showHomeArticle(HomeArticleBean homeArticleBean) {
         mRefreshLayout.finishRefresh(true);
         mRefreshLayout.finishLoadMore(true);
+        if (isRefresh) {
+            mArticleAdapter.setNewData(homeArticleBean.getDatas());
+        } else {
+            mArticleAdapter.addData(homeArticleBean.getDatas());
+        }
         if (homeArticleBean.getPageCount() == currentPage + 1) {
             mRefreshLayout.setNoMoreData(true);
             return;
         }
-        mArticleAdapter.addData(homeArticleBean.getDatas());
     }
 
     @Override

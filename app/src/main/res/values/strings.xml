@@ -21,4 +21,5 @@
     <string name="item_article_author_str">作者: %s</string>
     <string name="item_article_catalog_str">分类: %s</string>
     <string name="item_article_date_str">时间: %s</string>
+    <string name="title_system">体系文章</string>
 </resources>

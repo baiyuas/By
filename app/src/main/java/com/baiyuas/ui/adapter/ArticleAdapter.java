@@ -1,4 +1,4 @@
-package com.baiyuas.ui.home;
+package com.baiyuas.ui.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -37,11 +37,12 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleA
 
     public void addData(List<ArticleBean> data) {
         list.addAll(data);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(this.list.size() - data.size(), data.size());
     }
 
-    public void removeAll() {
+    public void setNewData(List<ArticleBean> data) {
         list.clear();
+        list.addAll(data);
         notifyDataSetChanged();
     }
 
@@ -88,15 +89,15 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleA
 
         Context context;
 
-        Resources getRes() {
-            return context.getResources();
-        }
-
         public ArticleAdapterViewHolder(View itemView) {
             super(itemView);
             context = itemView.getContext();
             itemView.setOnClickListener(v -> Toasty.show(itemView.getContext(), "jjjjjj"));
             ButterKnife.bind(this, itemView);
+        }
+
+        Resources getRes() {
+            return context.getResources();
         }
 
     }
