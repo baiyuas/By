@@ -1,6 +1,5 @@
 package com.baiyuas.ui.system;
 
-import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +10,8 @@ import com.baiyuas.model.bean.HomeArticleBean;
 import com.baiyuas.ui.adapter.ArticleAdapter;
 import com.baiyuas.utils.StatusBarUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -50,7 +51,6 @@ public class SysFragment extends MvpFragment<SysPresenter> implements SysContact
     protected void initEvent() {
         setToolbar(mToolbar);
         mToolbar.setTitle(R.string.title_system);
-        mToolbar.setTitleTextColor(Color.WHITE);
         mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         initRecycleView();
@@ -68,7 +68,7 @@ public class SysFragment extends MvpFragment<SysPresenter> implements SysContact
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
-        mArticleAdapter = new ArticleAdapter();
+        mArticleAdapter = new ArticleAdapter(R.layout.item_article_list, new ArrayList<>());
         mRecyclerView.setAdapter(mArticleAdapter);
     }
 
@@ -88,6 +88,7 @@ public class SysFragment extends MvpFragment<SysPresenter> implements SysContact
         }
         if (homeArticleBean.getPageCount() == currentPage + 1) {
             mRefreshLayout.setNoMoreData(true);
+            mRefreshLayout.setEnableAutoLoadMore(false);
             return;
         }
     }

@@ -46,12 +46,12 @@ public class SysPresenter extends RxPresenter<SysContact.View> implements SysCon
                 .flatMap(response -> {
                     if (!isEmptyList(response.getData())) {
                         Random random = new Random();
-                        int index = random.nextInt(response.getData().size() - 1);
+                        int index = response.getData().size() > 1 ? random.nextInt(response.getData().size() - 1) : 0;
                         List<HierarchyBean> children = response.getData().get(index).getChildren();
                         if (isEmptyList(children)) {
                             return null;
                         }
-                        int childIndex = random.nextInt(children.size() - 1);
+                        int childIndex = children.size() > 1 ? random.nextInt(children.size() - 1) : 0;
                         cid = children.get(childIndex).getId();
                         return netRepo.fetchHierarchyArticleList(0, cid);
                     }

@@ -2,8 +2,7 @@ package com.baiyuas.ui.home;
 
 import com.baiyuas.base.mvp.BasePresenter;
 import com.baiyuas.base.mvp.BaseView;
-import com.baiyuas.model.bean.HomeArticleBean;
-import com.baiyuas.model.bean.HomeBannerBean;
+import com.baiyuas.ui.home.adapter.HomeMultiEntity;
 
 import java.util.List;
 
@@ -16,15 +15,15 @@ public interface HomeContact {
 
     interface Presenter extends BasePresenter<HomeContact.View> {
 
-        void fetchHomeBannerList();
-
         void fetchHomeArticleList(int page);
+
+        void fetchHomeData();
     }
 
     interface View extends BaseView {
 
-        void showHomeBannerList(List<HomeBannerBean> list);
+        void showHomeArticle(List<HomeMultiEntity> data, boolean isEnd);
 
-        void showHomeArticle(HomeArticleBean homeArticleBean);
+        void showHomePageData(List<HomeMultiEntity> data);
     }
 }

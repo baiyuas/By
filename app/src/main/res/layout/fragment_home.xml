@@ -9,31 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nsv_container"
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_home_page"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.youth.banner.Banner
-                    android:id="@+id/banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/home_banner_height" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_article_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:nestedScrollingEnabled="false" />
-
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <android.support.v7.widget.Toolbar

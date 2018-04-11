@@ -1,25 +1,25 @@
 <resources>
-    <string name="app_name">玩Android</string>
-    <string name="title_activity_login">登录</string>
+    <string name="title_activity_login">login</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">邮箱</string>
-    <string name="prompt_password">密码</string>
-    <string name="action_sign_in">登录</string>
-    <string name="action_sign_in_short">登录</string>
-    <string name="error_invalid_email">请输入正确邮箱</string>
-    <string name="error_invalid_password">密码太短了</string>
-    <string name="error_incorrect_password">邮箱或者密码错误</string>
-    <string name="error_field_required">此处不能为空</string>
-    <string name="login_tip_success">登录成功!</string>
-    <string name="tip_req_fail">请求失败!</string>
-    <string name="tab_home">首页</string>
-    <string name="tab_project">项目</string>
-    <string name="tab_system">体系</string>
-    <string name="tab_navigation">导航</string>
-    <string name="tab_person">我的</string>
-    <string name="item_article_author_str">作者: %s</string>
-    <string name="item_article_catalog_str">分类: %s</string>
-    <string name="item_article_date_str">时间: %s</string>
-    <string name="title_system">体系文章</string>
+    <string name="prompt_email">email</string>
+    <string name="prompt_password">password</string>
+    <string name="action_sign_in">login</string>
+    <string name="action_sign_in_short">login</string>
+    <string name="error_invalid_email">Please enter the correct mailbox.</string>
+    <string name="error_invalid_password">The password is too short</string>
+    <string name="error_incorrect_password">Email or password error</string>
+    <string name="error_field_required">It cannot be empty here</string>
+    <string name="login_tip_success">Login successful!</string>
+    <string name="tip_req_fail">Login fail!</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_project">Project</string>
+    <string name="tab_system">Hierarchy</string>
+    <string name="tab_navigation">Navigationo</string>
+    <string name="tab_person">Person</string>
+    <string name="item_article_author_str">Author: %s</string>
+    <string name="item_article_catalog_str">Catalog: %s</string>
+    <string name="item_article_date_str">Date: %s</string>
+    <string name="app_name">PlayAndroid</string>
+    <string name="title_system">The Hierarchy Aticle</string>
 </resources>

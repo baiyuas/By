@@ -29,7 +29,7 @@ import java.util.List;
  */
 public abstract class BaseRecycleViewAdapter<T, V extends BaseRecycleViewHolder> extends RecyclerView.Adapter<V> {
 
-    public static final int EMPTY_VIEW = 0x01;
+    public static final int EMPTY_VIEW = -0x0009999;
 
     protected List<T> data;
 

@@ -116,7 +116,7 @@ public class MainActivity extends MvpActivity<MainPresenter> implements BottomNa
 
     @Override
     public void onPageSelected(int position) {
-        mBottomNavigationBar.setFirstSelectedPosition(position);
+        mBottomNavigationBar.selectTab(position);
     }
 
     @Override

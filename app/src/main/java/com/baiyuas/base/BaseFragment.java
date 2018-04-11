@@ -23,11 +23,33 @@ import butterknife.Unbinder;
  * @时间:2018/3/9
  * @描述:
  */
-public abstract class BaseFragment extends Fragment implements ISupport{
+public abstract class BaseFragment extends Fragment implements ISupport {
 
 
     Unbinder unbinder;
     View parentView;
+
+    @Override
+    public void toast(String msg) {
+        Toasty.show(getContext(), msg);
+    }
+
+    @Override
+    public void log(String log) {
+        ByLogger.log(log);
+    }
+
+    public void setToolbar(Toolbar toolbar) {
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && getActivity() != null) {
+            setStatusBar();
+        }
+    }
 
     @Nullable
     @Override
@@ -54,33 +76,11 @@ public abstract class BaseFragment extends Fragment implements ISupport{
         unbinder.unbind();
     }
 
-    protected abstract int bindLayout();
-
     protected abstract void initEvent();
 
-    @Override
-    public void toast(String msg) {
-        Toasty.show(getContext(), msg);
-    }
-
-    @Override
-    public void log(String log) {
-        ByLogger.log(log);
-    }
-
-    public void setToolbar(Toolbar toolbar) {
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && getActivity() != null) {
-            setStatusBar();
-        }
-    }
+    protected abstract int bindLayout();
 
     public void setStatusBar() {
-        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.colorPrimary), 100);
+        StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.colorPrimary), 255);
     }
 }
