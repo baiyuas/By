@@ -76,6 +76,7 @@ ext {
             "bottom-bar"                : "com.ashokvarma.android:bottom-navigation-bar:2.0.4",
             "banner"                    : "com.youth.banner:banner:1.+",
             "smart-refresh-layout"      : "com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1",
+            "baseAdapter"               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.38",
 
             //canary
             "blockcanary-android"       : "com.github.moduth:blockcanary-android:${dependVersion.blockcanary}",
