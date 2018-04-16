@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.android.vlayout.LayoutHelper;
-import com.alibaba.android.vlayout.layout.StaggeredGridLayoutHelper;
 import com.baiyuas.R;
 import com.baiyuas.model.bean.ProjectBean;
 import com.baiyuas.utils.SystemUtils;
