@@ -61,7 +61,7 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Pr
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> mPresenter.fetchCatUnderProject(mCatalogBeans.get(mCurrentCatalogIndex).getId(), mCurrentPage));
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
             isRefresh = true;
-            mPresenter.fetchCatUnderProject(mCatalogBeans.get(mCurrentPage = 0).getId(), mCurrentPage = 1);
+            mPresenter.fetchCatUnderProject(mCatalogBeans.get(mCurrentCatalogIndex = 0).getId(), mCurrentPage = 1);
         });
         mPresenter.fetchProjectCatalog();
     }

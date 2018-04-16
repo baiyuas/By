@@ -40,7 +40,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectA
     }
 
     public void setNewData(List<ProjectBean> list) {
-        this.data = data == null ? new ArrayList<>() : data;
+        this.data = list == null ? new ArrayList<>() : list;
         notifyDataSetChanged();
     }
 
