@@ -1,8 +1,9 @@
 package com.baiyuas.ui.home;
 
 import com.baiyuas.base.mvp.RxPresenter;
-import com.baiyuas.model.bean.HomeArticleBean;
+import com.baiyuas.model.bean.ArticleBean;
 import com.baiyuas.model.bean.HomeBannerBean;
+import com.baiyuas.model.bean.ListBean;
 import com.baiyuas.model.bean.WanResponse;
 import com.baiyuas.model.http.NetRepo;
 import com.baiyuas.ui.home.adapter.HomeMultiEntity;
@@ -39,6 +40,7 @@ public class HomePresenter extends RxPresenter<HomeContact.View> implements Home
                 .compose(composeScheduler())
                 .flatMap(response -> createData(response))
                 .subscribe(homeArticleBean -> {
+                    dismmissLoading();
                     if (checkNull(homeArticleBean)) {
                         ByLogger.log("home log is Empty!");
                         return;
@@ -49,7 +51,7 @@ public class HomePresenter extends RxPresenter<HomeContact.View> implements Home
                                 .forEach(articleBean -> list.add(new HomeMultiEntity(HomeMultiEntity.VIEW_TYPE_ARTICLE, articleBean)));
                         mView.get().showHomeArticle(list, homeArticleBean.getPageCount() == page);
                     }
-                }, throwable -> ByLogger.log("request home banner error" + throwable.getMessage(), LogLevel.E)));
+                }, throwable -> showError("request home banner error" + throwable.getMessage())));
     }
 
     @Override
@@ -59,6 +61,7 @@ public class HomePresenter extends RxPresenter<HomeContact.View> implements Home
                 (bannerResp, articleResp) -> createHomeData(bannerResp, articleResp))
                 .compose(composeScheduler())
                 .subscribe(result -> {
+                    dismmissLoading();
                     if (isEmptyList(result)) {
                         ByLogger.log("request home page data empty!");
                         return;
@@ -67,10 +70,10 @@ public class HomePresenter extends RxPresenter<HomeContact.View> implements Home
                     if (!checkNull(mView.get())) {
                         mView.get().showHomePageData(result);
                     }
-                }, throwable -> ByLogger.log("request home data error:" + throwable.getMessage(), LogLevel.E)));
+                }, throwable -> showError("request home data error:" + throwable.getMessage())));
     }
 
-    private List<HomeMultiEntity> createHomeData(WanResponse<List<HomeBannerBean>> resp1, WanResponse<HomeArticleBean> resp2) {
+    private List<HomeMultiEntity> createHomeData(WanResponse<List<HomeBannerBean>> resp1, WanResponse<ListBean<ArticleBean>> resp2) {
         List<HomeMultiEntity> list = new ArrayList<>();
 
         if (!checkNull(resp1) && resp1.getErrorCode() == 0) {

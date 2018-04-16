@@ -6,7 +6,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.baiyuas.R;
 import com.baiyuas.base.mvp.MvpFragment;
-import com.baiyuas.model.bean.HomeArticleBean;
+import com.baiyuas.model.bean.ArticleBean;
+import com.baiyuas.model.bean.ListBean;
 import com.baiyuas.ui.adapter.ArticleAdapter;
 import com.baiyuas.utils.StatusBarUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -64,6 +65,11 @@ public class SysFragment extends MvpFragment<SysPresenter> implements SysContact
         mRefreshLayout.setOnLoadMoreListener(refreshLayout -> mPresenter.fetchMoreHierarchyArticleList(++currentPage));
     }
 
+    @Override
+    public void setStatusBar() {
+        StatusBarUtil.setFullStatusbarForFragment(getActivity(), getResources().getColor(R.color.colorPrimary), mToolbar);
+    }
+
     private void initRecycleView() {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -73,23 +79,23 @@ public class SysFragment extends MvpFragment<SysPresenter> implements SysContact
     }
 
     @Override
-    public void setStatusBar() {
-        StatusBarUtil.setFullStatusbarForFragment(getActivity(), getResources().getColor(R.color.colorPrimary), mToolbar);
+    public void showHierarchyArticle(ListBean<ArticleBean> sysArticleBean) {
+        dismissLoading();
+        if (isRefresh) {
+            mArticleAdapter.setNewData(sysArticleBean.getDatas());
+            isRefresh = false;
+        } else {
+            mArticleAdapter.addData(sysArticleBean.getDatas());
+        }
+        if (sysArticleBean.getPageCount() == currentPage + 1) {
+            mRefreshLayout.setNoMoreData(true);
+            mRefreshLayout.setEnableAutoLoadMore(false);
+        }
     }
 
     @Override
-    public void showHierarchyArticle(HomeArticleBean homeArticleBean) {
+    public void dismissLoading() {
         mRefreshLayout.finishRefresh(true);
         mRefreshLayout.finishLoadMore(true);
-        if (isRefresh) {
-            mArticleAdapter.setNewData(homeArticleBean.getDatas());
-        } else {
-            mArticleAdapter.addData(homeArticleBean.getDatas());
-        }
-        if (homeArticleBean.getPageCount() == currentPage + 1) {
-            mRefreshLayout.setNoMoreData(true);
-            mRefreshLayout.setEnableAutoLoadMore(false);
-            return;
-        }
     }
 }

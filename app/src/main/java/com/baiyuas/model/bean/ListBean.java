@@ -3,22 +3,13 @@ package com.baiyuas.model.bean;
 import java.util.List;
 
 /**
- * @作者: Leo
- * @时间:2018/4/6
- * @描述:https://baiyuas.github.io/
+ * Copyright (c)2017
+ * 欣网互联网络科技有限公司
+ * author: lpc
+ * created on: 2018/4/15 0015
+ * description:
  */
-public class HomeArticleBean {
-
-
-    /**
-     * curPage : 1
-     * offset : 0
-     * over : false
-     * pageCount : 60
-     * size : 20
-     * total : 1194
-     * datas:[]
-     */
+public class ListBean<T> {
 
     private int curPage;
     private int offset;
@@ -26,15 +17,7 @@ public class HomeArticleBean {
     private int pageCount;
     private int size;
     private int total;
-    private List<ArticleBean> datas;
-
-    public List<ArticleBean> getDatas() {
-        return datas;
-    }
-
-    public void setDatas(List<ArticleBean> datas) {
-        this.datas = datas;
-    }
+    private List<T> datas;
 
     public int getCurPage() {
         return curPage;
@@ -82,5 +65,13 @@ public class HomeArticleBean {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public List<T> getDatas() {
+        return datas;
+    }
+
+    public void setDatas(List<T> datas) {
+        this.datas = datas;
     }
 }

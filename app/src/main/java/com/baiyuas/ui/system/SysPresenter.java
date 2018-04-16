@@ -1,26 +1,15 @@
 package com.baiyuas.ui.system;
 
-import com.baiyuas.app.ByDaggerAndroidApp;
 import com.baiyuas.base.mvp.RxPresenter;
-import com.baiyuas.model.bean.ArticleBean;
 import com.baiyuas.model.bean.HierarchyBean;
-import com.baiyuas.model.bean.HomeArticleBean;
-import com.baiyuas.model.bean.WanResponse;
 import com.baiyuas.model.http.NetRepo;
-import com.baiyuas.utils.Utils;
 import com.baiyuas.utils.log.ByLogger;
 import com.baiyuas.utils.log.LogLevel;
-import com.baiyuas.utils.toast.Toasty;
-
-import org.reactivestreams.Publisher;
 
 import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
-
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 import static com.baiyuas.utils.Utils.checkNull;
 import static com.baiyuas.utils.Utils.isEmptyList;
@@ -59,6 +48,7 @@ public class SysPresenter extends RxPresenter<SysContact.View> implements SysCon
                 }).compose(composeScheduler())
                 .flatMap(response -> createData(response))
                 .subscribe(hierarchyArticleBean -> {
+                    dismmissLoading();
                     if (checkNull(hierarchyArticleBean)) {
                         ByLogger.log("system article is Empty!");
                         return;
@@ -73,7 +63,7 @@ public class SysPresenter extends RxPresenter<SysContact.View> implements SysCon
                     if (!checkNull(mView.get())) {
                         mView.get().showHierarchyArticle(hierarchyArticleBean);
                     }
-                }, throwable -> ByLogger.log(throwable.getMessage(), LogLevel.E)));
+                }, throwable -> showError("request hierarchy error:" + throwable.getMessage())));
     }
 
     @Override
@@ -82,6 +72,7 @@ public class SysPresenter extends RxPresenter<SysContact.View> implements SysCon
                 .compose(composeScheduler())
                 .flatMap(response -> createData(response))
                 .subscribe(hierarchyArticleBean -> {
+                    dismmissLoading();
                     if (checkNull(hierarchyArticleBean)) {
                         ByLogger.log("system article is Empty!");
                         return;
@@ -90,6 +81,6 @@ public class SysPresenter extends RxPresenter<SysContact.View> implements SysCon
                     if (!checkNull(mView.get())) {
                         mView.get().showHierarchyArticle(hierarchyArticleBean);
                     }
-                }, throwable -> ByLogger.log(throwable.getMessage(), LogLevel.E)));
+                }, throwable -> showError("request hierarchy article error:" + throwable.getMessage())));
     }
 }

@@ -2,7 +2,8 @@ package com.baiyuas.ui.system;
 
 import com.baiyuas.base.mvp.BasePresenter;
 import com.baiyuas.base.mvp.BaseView;
-import com.baiyuas.model.bean.HomeArticleBean;
+import com.baiyuas.model.bean.ArticleBean;
+import com.baiyuas.model.bean.ListBean;
 
 /**
  * @作者: Leo
@@ -17,6 +18,6 @@ public class SysContact {
     }
 
     interface View extends BaseView {
-        void showHierarchyArticle(HomeArticleBean homeArticleBean);
+        void showHierarchyArticle(ListBean<ArticleBean> sysArticleBean);
     }
 }

@@ -2,6 +2,7 @@ package com.baiyuas.base.mvp;
 
 import com.baiyuas.model.bean.WanResponse;
 import com.baiyuas.model.http.exception.NetException;
+import com.baiyuas.utils.Utils;
 import com.baiyuas.utils.log.ByLogger;
 
 import java.lang.ref.WeakReference;
@@ -25,12 +26,6 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     CompositeDisposable compositeDisposable;
 
-    private void unSubscribe() {
-        if (compositeDisposable != null) {
-            compositeDisposable.clear();
-        }
-    }
-
     protected void addSubscribe(Disposable subscription) {
         if (compositeDisposable != null) {
             compositeDisposable.add(subscription);
@@ -53,7 +48,25 @@ public class RxPresenter<T extends BaseView> implements BasePresenter<T> {
 
     }
 
-    protected  <T> FlowableTransformer<T, T> composeScheduler() {    //compose简化线程
+    private void unSubscribe() {
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
+        }
+    }
+
+    protected void dismmissLoading() {
+        if (!Utils.checkNull(mView.get())) {
+            mView.get().dismissLoading();
+        }
+    }
+
+    protected void showError(String msg) {
+        if (!Utils.checkNull(mView.get())) {
+            mView.get().showError(msg);
+        }
+    }
+
+    protected <T> FlowableTransformer<T, T> composeScheduler() {    //compose简化线程
         return observable -> observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

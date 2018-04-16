@@ -100,8 +100,7 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
 
     @Override
     public void showHomeArticle(List<HomeMultiEntity> list, boolean isEnd) {
-        mRefreshLayout.finishRefresh(true);
-        mRefreshLayout.finishLoadMore(true);
+        dismissLoading();
 
         mHomePageAdapter.addData(list);
         mRefreshLayout.setNoMoreData(isEnd);
@@ -113,4 +112,10 @@ public class HomeFragment extends MvpFragment<HomePresenter> implements HomeCont
         mHomePageAdapter.setNewData(data);
     }
 
+    @Override
+    public void dismissLoading() {
+        mRefreshLayout.finishRefresh(true);
+        mRefreshLayout.finishLoadMore(true);
+
+    }
 }

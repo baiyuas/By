@@ -16,4 +16,5 @@
     <!-- selector -->
     <color name="text_Grey">#8496a0</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="project_item_tv_color">#8c8989</color>
 </resources>

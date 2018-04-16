@@ -24,4 +24,5 @@ public class Utils {
     public static boolean isValidPassword(String password) {
         return password.length() > 4;
     }
+
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.baiyuas.R;
 import com.baiyuas.base.inter.ISupport;
 import com.baiyuas.utils.StatusBarUtil;
+import com.baiyuas.utils.Utils;
 import com.baiyuas.utils.log.ByLogger;
 import com.baiyuas.utils.toast.Toasty;
 
@@ -24,7 +25,6 @@ import butterknife.Unbinder;
  * @描述:
  */
 public abstract class BaseFragment extends Fragment implements ISupport {
-
 
     Unbinder unbinder;
     View parentView;
@@ -59,26 +59,56 @@ public abstract class BaseFragment extends Fragment implements ISupport {
             throw new IllegalStateException(
                     "layout id need to set");
         }
-        parentView = inflater.inflate(layoutId, null, false);
+        if (isMaintainFragment() && Utils.checkNull(parentView)) {
+            parentView = inflater.inflate(layoutId, container, false);
+            unbinder = ButterKnife.bind(this, parentView);
+            initEvent();
+        } else if (!isMaintainFragment()) {
+            parentView = inflater.inflate(layoutId, null);
+        }
         return parentView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        unbinder = ButterKnife.bind(this, view);
-        initEvent();
+        if (!isMaintainFragment()) {
+            unbinder = ButterKnife.bind(this, view);
+            initEvent();
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        if (!isMaintainFragment()) {
+            unbinder.unbind();
+        } else {
+            ((ViewGroup) parentView).removeView(parentView);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (isMaintainFragment()) {
+            unbinder.unbind();
+        }
+    }
+
+
+    protected abstract int bindLayout();
+
+    /**
+     * 是否保持Fragment初始化一次View
+     *
+     * @return
+     */
+    protected boolean isMaintainFragment() {
+        return true;
     }
 
     protected abstract void initEvent();
-
-    protected abstract int bindLayout();
 
     public void setStatusBar() {
         StatusBarUtil.setColor(getActivity(), getResources().getColor(R.color.colorPrimary), 255);

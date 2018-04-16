@@ -46,8 +46,8 @@ public abstract class MultiItemRecycleViewAdapter<T> extends BaseRecycleViewAdap
 
             BaseItemProvider provider = mItemProviders.get(key);
             provider.mData = data;
-
-            ItemViewBind tag = provider.getClass().getAnnotation(ItemViewBind.class);
+            Class cls = provider.getClass();
+            ItemViewBind tag = cls.getClass().getAnnotation(ItemViewBind.class);
             getMultiTypeDelegate().registerItemType(key, tag.layoutId());
         }
     }

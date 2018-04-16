@@ -22,4 +22,5 @@
     <string name="item_article_date_str">Date: %s</string>
     <string name="app_name">PlayAndroid</string>
     <string name="title_system">The Hierarchy Aticle</string>
+    <string name="title_project">项目</string>
 </resources>

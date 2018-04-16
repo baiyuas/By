@@ -1,8 +1,11 @@
 package com.baiyuas.model.http;
 
+import com.baiyuas.model.bean.ArticleBean;
 import com.baiyuas.model.bean.HierarchyBean;
-import com.baiyuas.model.bean.HomeArticleBean;
 import com.baiyuas.model.bean.HomeBannerBean;
+import com.baiyuas.model.bean.ListBean;
+import com.baiyuas.model.bean.ProjectBean;
+import com.baiyuas.model.bean.ProjectCatalogBean;
 import com.baiyuas.model.bean.UserBean;
 import com.baiyuas.model.bean.WanResponse;
 
@@ -64,7 +67,7 @@ public interface NetRepo {
      * @return
      */
     @GET("article/list/{page}/json")
-    Flowable<WanResponse<HomeArticleBean>> fetchHomeArticleList(@Path("page") int page);
+    Flowable<WanResponse<ListBean<ArticleBean>>> fetchHomeArticleList(@Path("page") int page);
 
     /**
      * 获取体系列表
@@ -78,9 +81,26 @@ public interface NetRepo {
      * 获取体系下文章列表
      *
      * @param page 页码
-     * @param cid 体系id
+     * @param cid  体系id
      * @return
      */
     @GET("article/list/{page}/json")
-    Flowable<WanResponse<HomeArticleBean>> fetchHierarchyArticleList(@Path("page") int page, @Query("cid") int cid);
+    Flowable<WanResponse<ListBean<ArticleBean>>> fetchHierarchyArticleList(@Path("page") int page, @Query("cid") int cid);
+
+    /**
+     * 获取项目分类
+     *
+     * @return
+     */
+    @GET("project/tree/json")
+    Flowable<WanResponse<List<ProjectCatalogBean>>> fetchProjectCatList();
+
+    /**
+     * 获取指定分类下的项目
+     *
+     * @return
+     */
+    @GET("project/list/{page}/json")
+    Flowable<WanResponse<ListBean<ProjectBean>>> fetchCatUnderProject(@Path("page") int page, @Query("cid") int cid);
+
 }

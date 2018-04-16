@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.baiyuas.base.BaseFragment;
+import com.baiyuas.utils.log.ByLogger;
+import com.baiyuas.utils.log.LogLevel;
 
 import javax.inject.Inject;
 
@@ -16,7 +18,7 @@ import dagger.android.support.AndroidSupportInjection;
  * @时间:2018/3/9
  * @描述:https://baiyuas.github.io/
  */
-public abstract class MvpFragment<T extends RxPresenter> extends BaseFragment implements BaseView{
+public abstract class MvpFragment<T extends RxPresenter> extends BaseFragment implements BaseView {
 
     @Inject
     protected T mPresenter;
@@ -47,5 +49,15 @@ public abstract class MvpFragment<T extends RxPresenter> extends BaseFragment im
     @Override
     public void dismissLoading() {
 
+    }
+
+    @Override
+    public void showNoData() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
+        ByLogger.log(msg, LogLevel.E);
     }
 }

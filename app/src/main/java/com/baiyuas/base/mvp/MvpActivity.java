@@ -18,8 +18,10 @@ import dagger.android.support.HasSupportFragmentInjector;
  * @时间:2018/3/9
  * @描述:https://baiyuas.github.io/
  */
-public abstract class MvpActivity<T extends RxPresenter> extends BaseActivity implements BaseView, HasSupportFragmentInjector{
+public abstract class MvpActivity<T extends RxPresenter> extends BaseActivity implements BaseView, HasSupportFragmentInjector {
 
+    @Inject
+    protected T mPresenter;
     @Inject
     DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
@@ -27,10 +29,6 @@ public abstract class MvpActivity<T extends RxPresenter> extends BaseActivity im
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return dispatchingAndroidInjector;
     }
-
-    @Inject
-    protected T mPresenter;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +51,16 @@ public abstract class MvpActivity<T extends RxPresenter> extends BaseActivity im
 
     @Override
     public void dismissLoading() {
+
+    }
+
+    @Override
+    public void showNoData() {
+
+    }
+
+    @Override
+    public void showError(String msg) {
 
     }
 }

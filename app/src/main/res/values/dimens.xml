@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="home_banner_height">200dp</dimen>
+    <dimen name="item_project_text_height">20dp</dimen>
 </resources>
